@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trigger_sObject__c</fullName>
+    <description>Binding to sObject on which to execute the trigger handler</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Trigger sObject</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>TriggerConfigs</relationshipLabel>
+    <relationshipName>TriggerConfigs</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

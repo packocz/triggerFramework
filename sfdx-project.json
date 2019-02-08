@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "triggerFramework",
+      "default": true
+    },
+    {
+      "path": "examples",
+      "default": false
+    }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "44.0"
+}
