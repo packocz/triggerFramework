@@ -5,7 +5,7 @@ trigger AccountTriggerExample on Account (
     after insert,
     after update,
     after delete,
-    after undelete) 
-{
+    after undelete) {
+        
     TriggerDispatcher.handle(Account.getSObjectType());
 }

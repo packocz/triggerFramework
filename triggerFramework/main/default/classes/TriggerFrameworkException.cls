@@ -1,5 +1,4 @@
 public class TriggerFrameworkException 
-    extends Exception 
-{
+    extends Exception {
     
 }

@@ -1,6 +1,10 @@
+/**
+ * @author Aleš Remta
+ * @created 2019-02-08
+ */
 public virtual class TriggerHandlerBase
-    implements ITriggerHandler
-{
+    implements ITriggerHandler {
+
     public virtual void beforeInsertInitBulk(List<sObject> newRecords)
     {   
         String currentClassName = String.valueOf(this).substring(0,String.valueOf(this).indexOf(':'));

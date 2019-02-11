@@ -1,3 +1,32 @@
+/**
+ * Main worker of the TriggerFramework
+ * @author Aleš Remta
+ * @created 2019-02-08
+ *
+ * Used TriggerConfig__mdt custom metadata to bind ITriggerHandler implementation to SObjects. If implementation is generic
+ * the same class can be bound to more than one SObject. Each sObject can have many active handlers bound to it. In such cases
+ * the Order_of_Execution__c value is used to determine the order in which the handlers are called. (please be mindful of execution limits)
+ *
+ * For the metadata binding of ITriggerHandler implementation to work a single-line trigger needs to be in place
+ * e.g. 
+ *  trigger AccountTriggerExample on Account (
+ *     before insert, 
+ *     before update,
+ *     before delete,
+ *     after insert,
+ *     after update,
+ *     after delete,
+ *     after undelete) {
+ *         
+ *     TriggerDispatcher.handle(Account.getSObjectType());
+ * }
+ * 
+ * SUGGESTIONS:
+ * Do not use Order values that immediatelly follow each other if possible (1,2,3), more spacing will allow for future dependant implementations
+ * withing the org to inject between the handlers if required. i.e. 100 and 200 allows you to add 150 in a later separate package of which your
+ * original package does not need to know.
+ * 
+ */
 public class TriggerDispatcher {
 
     public static void handle(Schema.sObjectType soType)
