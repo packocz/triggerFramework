@@ -74,154 +74,215 @@ public class TriggerDispatcher {
             handlers.add(handler);
         }
 
-        if(Trigger.isInsert) {
-            for(ITriggerHandler handler : handlers) {
-                if(Trigger.isBefore) {
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_INSERT)) {
-                        for(sObject o : Trigger.new) {
+        if(Trigger.isInsert) {            
+            if(Trigger.isBefore) {
+                if(initActions.get(TriggerFrameworkAction.BEFORE_INSERT_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.beforeInsertInitBulk(Trigger.new);
+                    }
+                }
+                if(initActions.get(TriggerFrameworkAction.BEFORE_INSERT)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.beforeInsertInit(o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_INSERT_BULK)) {
-                        handler.beforeInsertInitBulk(Trigger.new);
+                }
+                if(doActions.get(TriggerFrameworkAction.BEFORE_INSERT_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onBeforeInsertBulk(Trigger.new);
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_INSERT)) {
-                        for(sObject o : Trigger.new) {
+                } 
+                if(doActions.get(TriggerFrameworkAction.BEFORE_INSERT)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onBeforeInsert(o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_INSERT_BULK)) {
-                        handler.onBeforeInsertBulk(Trigger.new);
-                    }   
-                    handler.beforeInsertFinally();               
+                }  
+                for(ITriggerHandler handler : handlers) {
+                    handler.beforeInsertFinally();  
+                }             
+            }
+            if(Trigger.isAfter) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_INSERT_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.afterInsertInitBulk(Trigger.newMap);
+                    }
                 }
-                if(Trigger.isAfter) {
-                    if(initActions.get(TriggerFrameworkAction.AFTER_INSERT)) {
-                        for(sObject o : Trigger.new) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_INSERT)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.afterInsertInit(o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.AFTER_INSERT_BULK)) {
-                        handler.afterInsertInitBulk(Trigger.newMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_INSERT_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onAfterInsertBulk(Trigger.newMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_INSERT)) {
-                        for(sObject o : Trigger.new) {
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_INSERT)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onAfterInsert(o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_INSERT_BULK)) {
-                        handler.onAfterInsertBulk(Trigger.newMap);
-                    }
+                }
+                for(ITriggerHandler handler : handlers) {
                     handler.afterInsertFinally();
                 }
             }
         }
-
         if(Trigger.isUpdate) {
-            for(ITriggerHandler handler : handlers) {
-                if(Trigger.isBefore) {
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_UPDATE)) {
-                        for(sObject o : Trigger.new) {
+            if(Trigger.isBefore) {
+                if(initActions.get(TriggerFrameworkAction.BEFORE_UPDATE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.beforeUpdateInitBulk(Trigger.oldMap, Trigger.newMap);
+                    }
+                }
+                if(initActions.get(TriggerFrameworkAction.BEFORE_UPDATE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.beforeUpdateInit(Trigger.oldMap.get(o.Id), o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_UPDATE_BULK)) {
-                        handler.beforeUpdateInitBulk(Trigger.oldMap, Trigger.newMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.BEFORE_UPDATE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onBeforeUpdateBulk(Trigger.oldMap, Trigger.newMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_UPDATE)) {
-                        for(sObject o : Trigger.new) {
+                } 
+                if(doActions.get(TriggerFrameworkAction.BEFORE_UPDATE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onBeforeUpdate(Trigger.oldMap.get(o.Id), o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_UPDATE_BULK)) {
-                        handler.onBeforeUpdateBulk(Trigger.oldMap, Trigger.newMap);
-                    }   
-                    handler.beforeUpdateFinally();               
+                } 
+                for(ITriggerHandler handler : handlers) { 
+                    handler.beforeUpdateFinally();         
+                }      
+            }
+            if(Trigger.isAfter) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_UPDATE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.afterUpdateInitBulk(Trigger.oldMap, Trigger.newMap);
+                    }
                 }
-                if(Trigger.isAfter) {
-                    if(initActions.get(TriggerFrameworkAction.AFTER_UPDATE)) {
-                        for(sObject o : Trigger.new) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_UPDATE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.afterUpdateInit(Trigger.oldMap.get(o.Id), o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.AFTER_UPDATE_BULK)) {
-                        handler.afterUpdateInitBulk(Trigger.oldMap, Trigger.newMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_UPDATE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onAfterUpdateBulk(Trigger.oldMap, Trigger.newMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_UPDATE)) {
-                        for(sObject o : Trigger.new) {
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_UPDATE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onAfterUpdate(Trigger.oldMap.get(o.Id), o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_UPDATE_BULK)) {
-                        handler.onAfterUpdateBulk(Trigger.oldMap, Trigger.newMap);
-                    }
+                }
+                for(ITriggerHandler handler : handlers) {
                     handler.afterUpdateFinally();
                 }
             }
         }
 
         if(Trigger.isDelete) {
-            for(ITriggerHandler handler : handlers) {
-                if(Trigger.isBefore) {
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_DELETE)) {
-                        for(sObject o : Trigger.old) {
+            if(Trigger.isBefore) {
+                if(initActions.get(TriggerFrameworkAction.BEFORE_DELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.beforeDeleteInitBulk(Trigger.oldMap);
+                    }
+                }
+                if(initActions.get(TriggerFrameworkAction.BEFORE_DELETE)) {
+                    for(sObject o : Trigger.old) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.beforeDeleteInit(o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.BEFORE_DELETE_BULK)) {
-                        handler.beforeDeleteInitBulk(Trigger.oldMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.BEFORE_DELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onBeforeDeleteBulk(Trigger.oldMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_DELETE)) {
-                        for(sObject o : Trigger.old) {
+                }   
+                if(doActions.get(TriggerFrameworkAction.BEFORE_DELETE)) {
+                    for(sObject o : Trigger.old) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onBeforeDelete(o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.BEFORE_DELETE_BULK)) {
-                        handler.onBeforeDeleteBulk(Trigger.oldMap);
-                    }   
-                    handler.beforeDeleteFinally();               
                 }
-                if(Trigger.isAfter) {
-                    if(initActions.get(TriggerFrameworkAction.AFTER_DELETE)) {
-                        for(sObject o : Trigger.old) {
+                for(ITriggerHandler handler : handlers) {
+                    handler.beforeDeleteFinally();   
+                }            
+            }
+            if(Trigger.isAfter) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_DELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.afterDeleteInitBulk(Trigger.oldMap);
+                    }
+                }
+                if(initActions.get(TriggerFrameworkAction.AFTER_DELETE)) {
+                    for(sObject o : Trigger.old) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.afterDeleteInit(o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.AFTER_DELETE_BULK)) {
-                        handler.afterDeleteInitBulk(Trigger.oldMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_DELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onAfterDeleteBulk(Trigger.oldMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_DELETE)) {
-                        for(sObject o : Trigger.old) {
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_DELETE)) {
+                    for(sObject o : Trigger.old) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onAfterDelete(o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_DELETE_BULK)) {
-                        handler.onAfterDeleteBulk(Trigger.oldMap);
-                    }
+                }
+                for(ITriggerHandler handler : handlers) {
                     handler.afterDeleteFinally();
                 }
             }
         }
 
         if(Trigger.isUndelete) {
-            for(ITriggerHandler handler : handlers) {
-                if(Trigger.isAfter) {
-                    if(initActions.get(TriggerFrameworkAction.AFTER_UNDELETE)) {
-                        for(sObject o : Trigger.new) {
+            if(Trigger.isAfter) {
+                if(initActions.get(TriggerFrameworkAction.AFTER_UNDELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.afterUndeleteInitBulk(Trigger.newMap);
+                    }
+                }
+                if(initActions.get(TriggerFrameworkAction.AFTER_UNDELETE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.afterUndeleteInit(o);
                         }
                     }
-                    if(initActions.get(TriggerFrameworkAction.AFTER_UNDELETE_BULK)) {
-                        handler.afterUndeleteInitBulk(Trigger.newMap);
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_UNDELETE_BULK)) {
+                    for(ITriggerHandler handler : handlers) {
+                        handler.onAfterUndeleteBulk(Trigger.newMap);
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_UNDELETE)) {
-                        for(sObject o : Trigger.new) {
+                }
+                if(doActions.get(TriggerFrameworkAction.AFTER_UNDELETE)) {
+                    for(sObject o : Trigger.new) {
+                        for(ITriggerHandler handler : handlers) {
                             handler.onAfterUndelete(o);
                         }
                     }
-                    if(doActions.get(TriggerFrameworkAction.AFTER_UNDELETE_BULK)) {
-                        handler.onAfterUndeleteBulk(Trigger.newMap);
-                    }
+                }
+                for(ITriggerHandler handler : handlers) {
                     handler.afterUndeleteFinally();
                 }
             }
