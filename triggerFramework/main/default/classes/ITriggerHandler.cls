@@ -84,7 +84,7 @@ public Interface ITriggerHandler {
 
     /**
      * shouldDoAction tells the framework whether to call the action method for a specified TRIGGER CONTEXT. Used
-     * to optimise performance so specifically meant to to be used to disabled either the per-record action or 
+     * to optimise performance so specifically meant to to be used to disabl either the per-record action or 
      * full list action so that only one would be used.
      *
      * @param  action action description
