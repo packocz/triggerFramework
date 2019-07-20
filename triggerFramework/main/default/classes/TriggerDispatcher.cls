@@ -34,7 +34,7 @@ public class TriggerDispatcher {
         List<TriggerConfig__mdt> handlerConfigs = [
             SELECT DeveloperName, Class_Name__c
             FROM TriggerConfig__mdt
-            WHERE Trigger_sObject__c =: soType.getDescribe().getName() AND
+            WHERE Trigger_sObject__r.QualifiedApiName =: soType.getDescribe().getName() AND
                 Active__c = TRUE AND Unit_Test_Only__c =: Test.isRunningTest()
             ORDER BY Order_of_Execution__c ASC
         ];
