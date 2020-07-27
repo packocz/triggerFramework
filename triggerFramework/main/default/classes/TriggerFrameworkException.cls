@@ -1,4 +1,2 @@
-public class TriggerFrameworkException 
-    extends Exception {
-    
+public class TriggerFrameworkException extends Exception {
 }

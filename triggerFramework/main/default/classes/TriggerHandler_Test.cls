@@ -64,11 +64,7 @@ private class TriggerHandler_Test {
 	static void testAfterUndelete() {
 		afterUndeleteMode();
 		handler.run();
-		System.assertEquals(
-			'afterUndelete',
-			lastMethodCalled,
-			'last method should be afterUndelete'
-		);
+		System.assertEquals('afterUndelete', lastMethodCalled, 'last method should be afterUndelete');
 	}
 
 	@isTest
@@ -77,19 +73,9 @@ private class TriggerHandler_Test {
 			handler.run();
 			System.assert(false, 'the handler ran but should have thrown');
 		} catch (TriggerHandler.TriggerHandlerException te) {
-			System.assertEquals(
-				TRIGGER_CONTEXT_ERROR,
-				te.getMessage(),
-				'the exception message should match'
-			);
+			System.assertEquals(TRIGGER_CONTEXT_ERROR, te.getMessage(), 'the exception message should match');
 		} catch (Exception e) {
-			System.assert(
-				false,
-				'the exception thrown was not expected: ' +
-				e.getTypeName() +
-				': ' +
-				e.getMessage()
-			);
+			System.assert(false, 'the exception thrown was not expected: ' + e.getTypeName() + ': ' + e.getMessage());
 		}
 	}
 
@@ -103,52 +89,28 @@ private class TriggerHandler_Test {
 		TriggerHandler.bypass('TestHandler');
 		handler.run();
 		System.assertEquals(null, lastMethodCalled, 'last method should be null when bypassed');
-		System.assertEquals(
-			true,
-			TriggerHandler.isBypassed('TestHandler'),
-			'test handler should be bypassed'
-		);
+		System.assertEquals(true, TriggerHandler.isBypassed('TestHandler'), 'test handler should be bypassed');
 		resetTest();
 
 		// clear that bypass and run handler
 		TriggerHandler.clearBypass('TestHandler');
 		handler.run();
-		System.assertEquals(
-			'afterUpdate',
-			lastMethodCalled,
-			'last method called should be afterUpdate'
-		);
-		System.assertEquals(
-			false,
-			TriggerHandler.isBypassed('TestHandler'),
-			'test handler should be bypassed'
-		);
+		System.assertEquals('afterUpdate', lastMethodCalled, 'last method called should be afterUpdate');
+		System.assertEquals(false, TriggerHandler.isBypassed('TestHandler'), 'test handler should be bypassed');
 		resetTest();
 
 		// test a re-bypass and run handler
 		TriggerHandler.bypass('TestHandler');
 		handler.run();
 		System.assertEquals(null, lastMethodCalled, 'last method should be null when bypassed');
-		System.assertEquals(
-			true,
-			TriggerHandler.isBypassed('TestHandler'),
-			'test handler should be bypassed'
-		);
+		System.assertEquals(true, TriggerHandler.isBypassed('TestHandler'), 'test handler should be bypassed');
 		resetTest();
 
 		// clear all bypasses and run handler
 		TriggerHandler.clearAllBypasses();
 		handler.run();
-		System.assertEquals(
-			'afterUpdate',
-			lastMethodCalled,
-			'last method called should be afterUpdate'
-		);
-		System.assertEquals(
-			false,
-			TriggerHandler.isBypassed('TestHandler'),
-			'test handler should be bypassed'
-		);
+		System.assertEquals('afterUpdate', lastMethodCalled, 'last method called should be afterUpdate');
+		System.assertEquals(false, TriggerHandler.isBypassed('TestHandler'), 'test handler should be bypassed');
 		resetTest();
 	}
 
@@ -176,13 +138,7 @@ private class TriggerHandler_Test {
 			// we're expecting to get here
 			System.assertEquals(null, lastMethodCalled, 'last method should be null');
 		} catch (Exception e) {
-			System.assert(
-				false,
-				'the exception thrown was not expected: ' +
-				e.getTypeName() +
-				': ' +
-				e.getMessage()
-			);
+			System.assert(false, 'the exception thrown was not expected: ' + e.getTypeName() + ': ' + e.getMessage());
 		}
 
 		// clear the tests
@@ -194,24 +150,11 @@ private class TriggerHandler_Test {
 		try {
 			// re-run the handler. We shouldn't throw now.
 			handler.run();
-			System.assertEquals(
-				'beforeInsert',
-				lastMethodCalled,
-				'last method should be beforeInsert'
-			);
+			System.assertEquals('beforeInsert', lastMethodCalled, 'last method should be beforeInsert');
 		} catch (TriggerHandler.TriggerHandlerException te) {
-			System.assert(
-				false,
-				'running the handler after clearing the loop count should not throw'
-			);
+			System.assert(false, 'running the handler after clearing the loop count should not throw');
 		} catch (Exception e) {
-			System.assert(
-				false,
-				'the exception thrown was not expected: ' +
-				e.getTypeName() +
-				': ' +
-				e.getMessage()
-			);
+			System.assert(false, 'the exception thrown was not expected: ' + e.getTypeName() + ': ' + e.getMessage());
 		}
 	}
 
@@ -241,11 +184,7 @@ private class TriggerHandler_Test {
 
 	@isTest
 	static void testGetHandlerName() {
-		System.assertEquals(
-			'TestHandler',
-			handler.getHandlerName(),
-			'handler name should match class name'
-		);
+		System.assertEquals('TestHandler', handler.getHandlerName(), 'handler name should match class name');
 	}
 
 	// test virtual methods

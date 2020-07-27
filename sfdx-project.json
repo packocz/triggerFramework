@@ -1,27 +1,27 @@
 {
-    "packageDirectories": [
-        {
-            "path": "triggerFramework",
-            "default": true
-        },
-        {
-            "path": "examples",
-            "default": false
-        },
-        {
-            "path": "triggerFramework",
-            "package": "triggerFramework",
-            "versionName": "ver 0.2",
-            "versionNumber": "0.2.0.NEXT",
-            "default": false
-        }
-    ],
-    "namespace": "",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "44.0",
-    "packageAliases": {
-        "triggerFramework": "0Ho1p000000fxSLCAY",
-        "triggerFramework@0.1.0-1": "04t1p0000002PB4AAM",
-        "triggerFramweork@0.2.0-1": "04t1p000000HRtAAAW"
-    }
+	"packageDirectories": [
+		{
+			"path": "triggerFramework",
+			"default": true
+		},
+		{
+			"path": "examples",
+			"default": false
+		},
+		{
+			"path": "triggerFramework",
+			"package": "triggerFramework",
+			"versionName": "ver 0.2",
+			"versionNumber": "0.2.0.NEXT",
+			"default": false
+		}
+	],
+	"namespace": "",
+	"sfdcLoginUrl": "https://login.salesforce.com",
+	"sourceApiVersion": "48.0",
+	"packageAliases": {
+		"triggerFramework": "0Ho1p000000fxSLCAY",
+		"triggerFramework@0.1.0-1": "04t1p0000002PB4AAM",
+		"triggerFramweork@0.2.0-1": "04t1p000000HRtAAAW"
+	}
 }
