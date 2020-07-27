@@ -14,10 +14,6 @@
                 <behavior>Required</behavior>
                 <field>DeveloperName</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Unit_Test_Only__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -39,11 +35,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Trigger_sObject__c</field>
+                <field>TriggerSObject__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Class_Name__c</field>
+                <field>ClassName__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -53,7 +49,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Order_of_Execution__c</field>
+                <field>OrderOfExecution__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

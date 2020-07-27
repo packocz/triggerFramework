@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Binds implementation of the ITriggerHandler (or ITriggerSimpleHandler) to an sObject</description>
+    <description>Binds instance of the TriggerHandler to an sObject</description>
     <label>TriggerConfig</label>
     <pluralLabel>TriggerConfigs</pluralLabel>
     <visibility>Public</visibility>
